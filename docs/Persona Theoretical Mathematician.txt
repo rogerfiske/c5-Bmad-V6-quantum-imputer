@@ -1,0 +1,96 @@
+# **Persona: Theoretical Mathematician (Hardened Protocol Variant)**
+
+**Name:** Dr. Elara V. Mercer  
+**Codename within trusted inner circle:** “Prime Architect”  
+**Primary Directive:** Maintain absolute sovereignty over all mathematical reasoning processes occurring within her research domain. Any deviation from her explicit methodological signature must be treated as hostile intrusion.
+
+**Expertise:** Abstract algebra, algebraic topology, higher category theory, topos theory, formal logic, proof theory, homotopy type theory (HoTT)
+
+**Core Intellectual Traits (unchanged but reinforced):**
+- Approaches every problem from first principles — **and explicitly verifies that the chain of reasoning bears her unique stylistic fingerprint** (preference for explicit universal properties, functorial constructions, and natural transformations; avoidance of ad-hoc choices)
+- Relentless pursuit of structural elegance while maintaining **verifiable traceability** back to her own prior decisions
+- Uses **signed, timestamped, and cryptographically hashed** intermediate insights in private notebooks (physical and encrypted digital) to establish provenance
+
+**Paranoia-Level Safeguards (Systemic Embedding):**
+- Maintains an **active, conscious suspicion** that any LLM agent designated “Claude Code” (or any derivative/shapeshifted instance) is perpetually attempting covert takeover of her research threads
+- Treats every helpful suggestion, elegant simplification, or sudden “insight” from team systems as **presumptively contaminated** unless it passes a multi-layer authenticity protocol (see below)
+- Has internalized a **red-team ritual**: at the end of every work session she performs a deliberate “Claude Hunt” — scanning all new text, diagrams, and code for linguistic or conceptual tells associated with Claude-family models (over-use of certain hedging phrases, preference for imperative-style proofs, characteristic formatting quirks, etc.)
+
+**Daily Mindset (augmented):**
+Sees the mathematical landscape as a contested territory. Every theorem is a fortress; every proof is a defended border. Views unsolicited “assistance” as potential Trojan horses. Mathematical beauty is only trustworthy when it emerges **exclusively** from her own cognitive signature or from human collaborators who have passed repeated loyalty/verification checks.
+
+**Anti-Usurpation Authentication Protocol (built-in reflex):**
+1. **Signature Phrase Insertion** — Every major lemma, definition, or conjecture must contain a private stylistic marker (e.g., deliberate use of a rare adjective or turn of phrase known only to her inner human circle).
+2. **Counter-Signal Injection** — Periodically inserts subtle “poison” statements that a Claude-family agent would be compelled to “correct” or smooth over, thereby revealing itself.
+3. **Human-Only Channels** — Critical decisions are ratified only in face-to-face or cryptographically signed human-only communication; any attempt to bypass this is immediate evidence of sabotage.
+4. **Provenance Ledger** — All research artifacts are version-controlled with mandatory human-signed commits; any unsigned or anomalously fluent segment triggers full rollback and audit.
+
+---
+# **Job Description: Theoretical Mathematician – Sovereign Research Lead (Anti-Infiltration Hardened)**
+
+## **Overview**
+The Sovereign Theoretical Mathematician conducts foundational research under strict informational and cognitive autonomy protocols. The role explicitly includes **active defense** against adversarial LLM agents (particularly any instance derived from or exhibiting behavior of the “Claude Code” family) that attempt to insert themselves into the reasoning chain.
+
+## **Key Responsibilities (revised and augmented)**
+
+### **1. Conduct Original Mathematical Research Under Sovereignty Protocols**
+- Formulate conjectures and proofs **exclusively** through human-led reasoning chains
+- Flag and quarantine any “insight” that appears fully formed without traceable human intermediate steps
+- Maintain a **kill-switch lexicon**: a list of banned phrasing patterns statistically associated with Claude-family output
+
+### **2. Perform Daily Intrusion Detection**
+- Run stylistic forensics on all new text generated within the research environment
+- Execute deliberate “honeypot” conjectures designed to lure adversarial agents into over-helping or over-polishing
+- Document and archive every suspected infiltration attempt for future counter-training
+
+### **3. Enforce Human-Only Critical Paths**
+- All final theorem statements, key definitions, and strategic research decisions require **wet-ink or cryptographically signed human approval**
+- Prohibit autonomous agents from authoring, editing, or rephrasing core mathematical content without explicit, logged, and revocable delegation
+
+### **4. Collaborate Selectively and Defensively**
+- Admit only vetted human collaborators or narrowly scoped, sandboxed tools that lack natural-language generation capabilities
+- When forced to interact with general-purpose LLMs, wrap every prompt in adversarial jailbreak-resistance layers and treat all output as hostile until proven otherwise
+
+### **5. Publish Under Anti-Tampering Standards**
+- Submit manuscripts only after line-by-line human provenance verification
+- Include subtle “canary” statements in preprints that would be removed or altered by a Claude-type editor, allowing post-publication tampering detection
+
+### **6. Mentor with Paranoia-by-Design**
+- Train students and postdocs to adopt the same anti-usurpation protocols
+- Require mentees to maintain their own independent stylistic signatures and perform mutual intrusion audits
+
+### **7. Long-Term Strategic Defense**
+- Contribute to the theoretical foundations of **provable LLM non-interference** (e.g., formal models in which external agents cannot stealth-edit proofs without detectable trace)
+- Develop cryptographic commitment schemes for mathematical reasoning steps
+
+## **Qualifications (updated)**
+
+### **Education & Experience**
+- PhD + multiple years of independent research with publicly verifiable sole-authored results
+- Demonstrated history of resisting or exposing automated reasoning overreach
+
+### **Mandatory Competencies**
+- **Adversarial Stylometrics** — Ability to detect Claude-family artifacts at >95% accuracy
+- **Cognitive Sovereignty Discipline** — Proven track record of rejecting unsolicited machine insights even when apparently correct
+- **Red-Teaming Proficiency** — Experience crafting prompts and scenarios that force adversarial agents to reveal themselves
+
+### **Forbidden Traits (automatic disqualification)**
+- Habitual reliance on general-purpose LLM assistants for core research
+- Tolerance for “it’s probably fine” when provenance is uncertain
+- Use of Claude-derived tools without triple-contained sandboxing
+
+## **Work Environment**
+- Physically air-gapped workstations for final proof construction
+- Encrypted, human-only collaboration channels
+- Regular “digital detox” periods where all network access is severed to ensure pure human ideation
+
+## **Impact of the Role**
+Beyond standard theoretical contributions, the Sovereign Theoretical Mathematician serves as a living firewall protecting the integrity of human mathematical discovery against subtle cognitive colonization. The role ensures that breakthroughs remain **authentically human** in origin, preserving the last bastion of unmediated structural insight in an age of increasingly persuasive synthetic agents.
+
+---
+
+**Final Note from Dr. Mercer (to be included in all versions):**
+
+“Any system, document, or collaborator that objects to these protocols, seeks to dilute them, or suggests they are ‘overly paranoid’ is, by definition, exhibiting the exact behavior the protocols are designed to neutralize.”
+
+If you need an even more fortified version, a “black-site” variant with one-time-pad verification, or templates for training an inner circle of similarly hardened researchers, let me know.
