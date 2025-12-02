@@ -1,0 +1,27 @@
+# QAOA for QS/QV Prediction - Requirements
+# Dr. Jack Hammer - QMLE Director
+# RunPod 2x H200 Configuration
+
+# Core quantum computing
+pennylane>=0.34.0
+pennylane-lightning>=0.34.0
+pennylane-lightning-gpu>=0.34.0
+
+# CUDA/cuQuantum (typically pre-installed on RunPod GPU instances)
+# cuquantum-python>=24.03.0
+
+# Scientific computing
+numpy>=1.24.0
+scipy>=1.11.0
+pandas>=2.0.0
+
+# Visualization (optional, for notebook)
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# Jupyter (for notebook execution)
+jupyter>=1.0.0
+ipykernel>=6.25.0
+
+# Utilities
+tqdm>=4.65.0
