@@ -3,6 +3,8 @@
 QAOA Tensor Network Implementation for QS/QV Prediction
 Dr. Jack Hammer - QMLE Director
 
+GPU-ACCELERATED VERSION using NVIDIA cuTensorNet on H200 GPUs.
+
 Uses Matrix Product State (MPS) tensor network representation to handle
 all 39 qubits without exponential memory requirements.
 
@@ -11,6 +13,10 @@ Memory Scaling:
 - Tensor network MPS: O(n * D^2) - FEASIBLE (linear in qubits)
 
 Where D = bond dimension controls accuracy vs memory tradeoff.
+
+Backend Priority:
+1. lightning.tensor (GPU) - cuTensorNet on H200
+2. default.tensor (CPU) - fallback if GPU unavailable
 """
 
 import os
@@ -28,6 +34,50 @@ import time
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'src'))
 
 import pennylane as qml
+
+# ============================================================================
+# GPU DETECTION
+# ============================================================================
+
+def detect_gpu() -> bool:
+    """
+    Detect if NVIDIA GPU is available for cuTensorNet acceleration.
+
+    Returns:
+        True if GPU is available and CUDA is working
+    """
+    try:
+        import subprocess
+        result = subprocess.run(
+            ['nvidia-smi', '--query-gpu=name,memory.total', '--format=csv,noheader'],
+            capture_output=True, text=True, timeout=10
+        )
+        if result.returncode == 0 and result.stdout.strip():
+            gpus = result.stdout.strip().split('\n')
+            print(f"\n  GPU Detection:")
+            for i, gpu in enumerate(gpus):
+                print(f"    GPU {i}: {gpu.strip()}")
+            return True
+    except FileNotFoundError:
+        print(f"\n  GPU Detection: nvidia-smi not found (no NVIDIA driver)")
+    except subprocess.TimeoutExpired:
+        print(f"\n  GPU Detection: nvidia-smi timed out")
+    except Exception as e:
+        print(f"\n  GPU Detection: Error - {e}")
+
+    return False
+
+
+def check_cutensornet() -> bool:
+    """Check if cuTensorNet is available."""
+    try:
+        import cuquantum
+        print(f"  cuQuantum version: {cuquantum.__version__}")
+        return True
+    except ImportError:
+        print(f"  cuQuantum: Not installed")
+        return False
+
 
 # ============================================================================
 # DATA LOADING (from src/data_loader.py - simplified for standalone)
@@ -155,22 +205,55 @@ def create_tensor_qaoa_qnode(
     print(f"  SVD cutoff: {cutoff}")
     print(f"  Mixer type: {mixer_type}")
 
-    # Create tensor network device with MPS method
-    try:
-        dev = qml.device(
-            "default.tensor",
-            wires=n_qubits,
-            method="mps",
-            max_bond_dim=max_bond_dim,
-            cutoff=cutoff
-        )
-        print(f"  Device: default.tensor (MPS)")
-        print(f"  Estimated memory: ~{estimate_mps_memory(n_qubits, max_bond_dim):.1f} GB")
-    except Exception as e:
-        print(f"  WARNING: default.tensor failed: {e}")
-        print(f"  Attempting fallback to default.qubit...")
+    # Detect GPU availability
+    gpu_available = detect_gpu()
+
+    # Create tensor network device - try GPU first, then CPU fallback
+    dev = None
+    device_name = None
+
+    # Priority 1: lightning.tensor (GPU-accelerated via cuTensorNet)
+    if gpu_available:
+        try:
+            dev = qml.device(
+                "lightning.tensor",
+                wires=n_qubits,
+                method="mps",
+                max_bond_dim=max_bond_dim,
+                cutoff=cutoff
+            )
+            device_name = "lightning.tensor (GPU - cuTensorNet)"
+            print(f"  ✓ Device: {device_name}")
+            print(f"  ✓ GPU acceleration: ENABLED (H200)")
+        except Exception as e:
+            print(f"  ✗ lightning.tensor failed: {e}")
+            dev = None
+
+    # Priority 2: default.tensor (CPU fallback)
+    if dev is None:
+        try:
+            dev = qml.device(
+                "default.tensor",
+                wires=n_qubits,
+                method="mps",
+                max_bond_dim=max_bond_dim,
+                cutoff=cutoff
+            )
+            device_name = "default.tensor (CPU)"
+            print(f"  ⚠ Device: {device_name}")
+            print(f"  ⚠ GPU acceleration: DISABLED (CPU fallback)")
+        except Exception as e:
+            print(f"  ✗ default.tensor failed: {e}")
+            dev = None
+
+    # Priority 3: default.qubit (last resort - will be slow!)
+    if dev is None:
         dev = qml.device("default.qubit", wires=n_qubits)
-        print(f"  WARNING: Using default.qubit - may be slow or fail for {n_qubits} qubits")
+        device_name = "default.qubit (CPU - WARNING: SLOW)"
+        print(f"  ⚠⚠ Device: {device_name}")
+        print(f"  ⚠⚠ WARNING: State vector simulation - may fail for {n_qubits} qubits!")
+
+    print(f"  Estimated memory: ~{estimate_mps_memory(n_qubits, max_bond_dim):.1f} GB")
 
     # Build cost Hamiltonian coefficients and observables
     coeffs = []
@@ -452,18 +535,34 @@ def create_sampling_qnode(
     n_shots: int = 1024,
     mixer_type: str = 'xy'
 ):
-    """Create QNode for sampling from optimized QAOA state."""
+    """Create QNode for sampling from optimized QAOA state (GPU-accelerated)."""
 
+    dev = None
+
+    # Try lightning.tensor (GPU) first
     try:
         dev = qml.device(
-            "default.tensor",
+            "lightning.tensor",
             wires=n_qubits,
             method="mps",
             max_bond_dim=max_bond_dim,
             shots=n_shots
         )
     except:
-        dev = qml.device("default.qubit", wires=n_qubits, shots=n_shots)
+        pass
+
+    # Fallback to default.tensor (CPU)
+    if dev is None:
+        try:
+            dev = qml.device(
+                "default.tensor",
+                wires=n_qubits,
+                method="mps",
+                max_bond_dim=max_bond_dim,
+                shots=n_shots
+            )
+        except:
+            dev = qml.device("default.qubit", wires=n_qubits, shots=n_shots)
 
     @qml.qnode(dev)
     def sample_circuit(params):

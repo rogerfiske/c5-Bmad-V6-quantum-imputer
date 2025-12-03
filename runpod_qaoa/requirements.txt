@@ -1,14 +1,22 @@
 # QAOA for QS/QV Prediction - Requirements
 # Dr. Jack Hammer - QMLE Director
-# RunPod 2x H200 Configuration
+# RunPod H200 GPU Configuration
 
 # Core quantum computing
 pennylane>=0.34.0
 pennylane-lightning>=0.34.0
-pennylane-lightning-gpu>=0.34.0
+
+# GPU-accelerated backends
+pennylane-lightning-gpu>=0.34.0      # State vector GPU (cuStateVec)
+# pennylane-lightning-tensor         # Tensor network GPU (cuTensorNet) - install separately
+
+# Tensor network CPU fallback
+quimb>=1.8.0
+cotengra>=0.6.0
 
 # CUDA/cuQuantum (typically pre-installed on RunPod GPU instances)
 # cuquantum-python>=24.03.0
+# cutensornet-cu12                   # For lightning.tensor GPU support
 
 # Scientific computing
 numpy>=1.24.0
